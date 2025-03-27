@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>table</title>
+  <style>
+    table {
+      table-layout: fixed;
+      width: 100%;
+      border-collapse: collapse;
+      border: 3px solid purple;
+    }
+
+    thead th:nth-child(1) {
+      width: 35%;
+    }
+
+    thead th:nth-child(2) {
+      width: 35%;
+    }
+
+    thead th:nth-child(3) {
+      width: 30%;
+    }
+
+    th,
+    td {
+      padding: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>[메뉴판] 만들어보기</h1>
+  <table border="5">
+    <caption>음식</caption>
+    <tr>
+      <td>한식</td>
+      <td>양식</td>
+      <td>중식</td>
+    </tr>
+    <tr>
+      <td>김치찌개</td>
+      <td>스파게티</td>
+      <td>짜장면</td>
+    </tr>
+    <tr>
+      <td>된장찌개</td>
+      <td>피자</td>
+      <td>짬뽕</td>
+    </tr>
+    <tr>
+      <td>우렁쌈밥</td>
+      <td>스테이크</td>
+      <td>탕수육</td>
+    </tr>
+  </table>
+</body>
+</html>

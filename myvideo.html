@@ -1,23 +1,58 @@
 <!DOCTYPE html>
+<html lang="ko">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed Button Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
 
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        
+    </style>
 </head>
 
 <body>
-    <video autoplay width="800">
-        <source src="/video/aatrox.mp4" type="video/aatrox.mp4">
-    </video>
-    <div>
-        <a>제가 했던 게임 영상을 올려보았습니다!.</a>
+
+    <div class="container">
+
+        <video controls preload="auto">
+            <source src="aatrox.webm" type="video/webm">
+            <source src="aatrox.mp4" type="video/mp4">
+            브라우저가 비디오 태그를 지원하지 않습니다.
+        </video>
+        
+        <div>
+            <a>제가 했던 게임 영상을 올려보았습니다!.</a>
+            <br>
+            <br>
+            <a><b>video</b> 함수와<b> controls</b> 기능을 활용해 구현한 영상파일이 첨부된 페이지입니다.</a>
+        </div>
         <br>
         <br>
-        <a>video 함수와 controls 기능을 활용해 구현한 영상파일이 첨부된 페이지입니다.</a>
-    </div>
-    <br>
-    <br>
-    <div>
-        <a>유튜브 영상은 공유하기 -> 퍼가기 과정에서 소스코드를 얻을 수 있고, 아래와 같이 영상을 웹페이지에 삽입할 수 있습니다.</a>
-    </div>
-    <iframe width="800" height="500" src="https://www.youtube.com/embed/8U1Ka111vqs?si=Wse2kriurCLnE9cm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div>
+            <a>유튜브 영상은 <b>공유하기 -> 퍼가기 과정</b>에서 소스코드를 얻을 수 있고, </a>
+            <br>
+            <a>아래와 같이 영상을 웹페이지에 삽입할 수 있습니다.</a>
+        </div>
+        <iframe width="800" height="500" src="https://www.youtube.com/embed/8U1Ka111vqs?si=Wse2kriurCLnE9cm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div> 
+
+    
 
 </body>
+</html>

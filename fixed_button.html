@@ -1,101 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed Button Page</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
         .fixed_bt {
-            position:fixed;
-            bottom :50px;
+            position: fixed;
+            bottom: 50px;
             text-align: center;
-            width:100%;
+            width: 100%;
             z-index: 999;
         }
-        .fixed_bt a{
+
+        .fixed_bt a {
             font-size: 15px;
-            padding:10px 30px;
-            width: 100%;
-            max-width: 200px;
+            padding: 10px 30px;
             background-color: #f9f9f9;
             box-shadow: 2px 2px 5px #333333;
             color: #333333;
-            text-decoration: none !important;
+            text-decoration: none;
             border-radius: 10px;
             cursor: pointer;
             transition: background-color 0.3s;
             display: inline-block;
         }
-        .fixed_bt a:hover{
+
+        .fixed_bt a:hover {
             background-color: #333333;
-            color: #ffffff !important;
+            color: #ffffff;
         }
     </style>
 </head>
-
 <body>
+
+    <div class="container">
+        <h1>스크롤 가능한 페이지</h1>
+        <p>이 페이지는 스크롤이 가능하며, 따라다니는 버튼이 있습니다.</p>
+        <p>아래로 스크롤해보세요.</p>
+        <p>fixed의 기능을 활용하여 사용자가 보는 화면에서 고정된 위치에 버튼이 따라오도록 할 수 있습니다!</p>
+        
+        <div style="height: 1500px; background: linear-gradient(white, lightgray);"></div>
+    </div>
+
     <div class="fixed_bt">
         <a href="https://www.naver.com" target="_blank">따라다니는 버튼</a>
     </div>
 
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
-    <p>끼얏호우</p>
 </body>
-
-
 </html>

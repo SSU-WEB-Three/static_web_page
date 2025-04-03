@@ -11,19 +11,19 @@
         }
 
         #spadeA {
-            z-index: -3;left: 10px; top:20px;
+            z-index: -1;left: 800px; top:20px;
         }
 
         #spade2 {
-            z-index: 2;left: 40px; top:30px;
+            z-index: 2;left:820px; top:30px;
         }
 
         #spade4 {
-            z-index: 5;left: 70px; top:40px;
+            z-index: 5;left: 860px; top:40px;
         }
 
         #spade7 {
-            z-index: 7;left: 100px; top:50px;
+            z-index: 7;left: 890px; top:50px;
         }
 
         body {
@@ -51,7 +51,13 @@
         <div>
             <p>이곳은 z-index의 요소를 보여주는 곳입니다.</p>
             <br>
-            <p></p>
+            <p> 트럼프 카드들은 z-index에 의해 보이는 순서가 정해집니다.</p>
+            <br>
+            <p>이런! 에이스 카드는 z-index를 음수로 설정했더니 뒤로 사라져버렸군요!</p>
+            <br>
+            <p>즉, <b>z-index를 설정하지 않은 오브젝트는 z-index값이 0으로 인식됩니다.</b></p>
+            <br>
+            <p>이 점에 유의하면서 사용해야겠네요!</p>
         </div>
         <img id="spadeA" src="image/spadeace.png"
         width="100", height="140" alt="스페이드에이스">

@@ -4,11 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+     body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+  </style>
 </head>
 <body>
+  <div class="container">
   <figure>
+    <p>이 페이지에선 <b>audio</b> 태그를 넣어보았습니다! </p>
+    <br>
+    <p>아래의 재생 버튼을 눌러 사운드를 재생해보세요.</p>
     <figcaption>Listen to the <mark>t-rex-audio</mark></figcaption>
     <audio controls src="./audio/t-rex-roar.mp3"></audio>
   </figure>
+</div>
 </body>
 </html>

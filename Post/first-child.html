@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>:first-child 예제</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .content p:first-child {
+            background-color: #dff0d8;
+            padding: 10px;
+            border-left: 5px solid #3c763d;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>:first-child 예제</h1>
+        <div class="content">
+            <p>이 단락은 첫 번째 자식 요소로, 스타일이 적용됩니다.</p>
+            <p>이 단락은 두 번째 자식 요소로, 기본 스타일입니다.</p>
+            <p>이 단락은 세 번째 자식 요소로, 기본 스타일입니다.</p>
+        </div>
+    </div>
+
+</body>
+</html>

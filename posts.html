@@ -11,6 +11,7 @@
     <nav class="navbar" style="background-color: #e3f2fd;">
         <div class="container-fluid">
             <a class="navbar-brand" href="./index.html"><img src="Post\image\home.png" width=30>&nbsp;웹프로그래밍</a>
+            <a class="navbar-brand" href="./index.html"><img src="Post/image/home.png" width=30></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -26,73 +27,75 @@
 
     <div class="container mt-4">
         <h2 class="mb-4">게시글 목록</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">호버</h5>
-                        <p class="card-text">호버를 활용하기</p>
-                        <a href="Post\hover-active.html" class="btn btn-primary">자세히 보기</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">card-text</h5>
-                        <p class="card-text">card-text 활용</p>
-                        <a href="Post\fixed-button.html" class="btn btn-primary">자세히 보기</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">z-index</h5>
-                        <p class="card-text">z-index 활용</p>
-                        <a href="Post\z-index.html" class="btn btn-primary">자세히 보기</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">audio</h5>
-                        <p class="card-text">audio 활용</p>
-                        <a href="Post\audio.html" class="btn btn-primary">자세히 보기</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">table</h5>
-                        <p class="card-text">table 활용</p>
-                        <a href="Post\table.html" class="btn btn-primary">자세히 보기</a>
-                    </div>
-                </div>
-            </div>
-                <div class="col-md-4">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">input Form</h5>
-                            <p class="card-text">input Form 활용</p>
-                            <a href="Post\input.html" class="btn btn-primary">자세히 보기</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">video</h5>
-                            <p class="card-text">video 활용</p>
-                            <a href="Post\my-video.html" class="btn btn-primary">자세히 보기</a>
-                        </div>
-                    </div>
-            
-            </div>
+        <div class="row" id="post-container">
+            <!-- 게시글이 동적으로 추가될 공간 -->
+        </div>
+
+        <!-- 페이지네이션 버튼 -->
+        <div class="d-flex justify-content-center mt-4">
+            <button id="prevPage" class="btn btn-secondary me-2" disabled>이전</button>
+            <button id="nextPage" class="btn btn-primary">다음</button>
         </div>
     </div>
+
+    <script>
+        const posts = [
+            { title: "호버", text: "호버를 활용하기", link: "Post/hover-active.html" },
+            { title: "card-text", text: "card-text 활용", link: "Post/fixed-button.html" },
+            { title: "z-index", text: "z-index 활용", link: "Post/z-index.html" },
+            { title: "audio", text: "audio 활용", link: "Post/audio.html" },
+            { title: "table", text: "table 활용", link: "Post/table.html" },
+            { title: "input Form", text: "input Form 활용", link: "Post/input.html" },
+            { title: "video", text: "video 활용", link: "Post/my-video.html" }
+        ];
+
+        const postsPerPage = 3;
+        let currentPage = 1;
+
+        function renderPosts() {
+            const postContainer = document.getElementById("post-container");
+            postContainer.innerHTML = "";
+
+            const start = (currentPage - 1) * postsPerPage;
+            const end = start + postsPerPage;
+            const paginatedPosts = posts.slice(start, end);
+
+            paginatedPosts.forEach(post => {
+                const postHtml = `
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">${post.title}</h5>
+                                <p class="card-text">${post.text}</p>
+                                <a href="${post.link}" class="btn btn-primary">자세히 보기</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                postContainer.innerHTML += postHtml;
+            });
+
+            // 페이지 버튼 활성화/비활성화
+            document.getElementById("prevPage").disabled = currentPage === 1;
+            document.getElementById("nextPage").disabled = currentPage * postsPerPage >= posts.length;
+        }
+
+        document.getElementById("prevPage").addEventListener("click", () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderPosts();
+            }
+        });
+
+        document.getElementById("nextPage").addEventListener("click", () => {
+            if (currentPage * postsPerPage < posts.length) {
+                currentPage++;
+                renderPosts();
+            }
+        });
+
+        renderPosts();  // 초기 게시글 표시
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>색상 카드 짝 맞추기 게임</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      padding: 30px;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    #controls {
+      margin-bottom: 30px;
+    }
+
+    .game-board {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 15px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .card {
+      width: 100px;
+      height: 100px;
+      background-color: #ccc;
+      cursor: pointer;
+      border-radius: 8px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.5s;
+    }
+
+    .card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card .front, .card .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 8px;
+    }
+
+    .card .front {
+      transform: rotateY(180deg);
+    }
+
+    .card .back {
+      background-color: #bbb;
+    }
+
+    .card.matched {
+      pointer-events: none;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>카드 짝 맞추기 게임</h1>
+    <br>
+    <p>
+      이 페이지에서는 사용자가 원하는 카드 수를 입력할 수 있도록 <code>&lt;input&gt;</code>과 <code>&lt;button&gt;</code> 태그를 활용하였습니다. JavaScript를 통해 DOM 요소를 동적으로 생성하여 입력한 수만큼 색상 카드를 만들어주며, 같은 색상의 카드 두 개를 맞추면 사라지는 짝 맞추기 로직도 구현하였습니다.
+      <br><br>
+      또한, 모든 카드를 맞췄을 경우 <code>alert()</code> 함수를 통해 축하 메시지를 출력하는 기능도 추가하였습니다. 이러한 요소들을 통해 사용자는 재미있고 상호작용적인 카드 게임을 즐길 수 있습니다 🎮
+    </p>
+    <br>
+
+    <div id="controls">
+      <label>카드 수 입력 (짝수만, 최대 20장): </label>
+      <input type="number" id="cardCount" min="4" max="20" step="2" value="4">
+      <button onclick="startGame()">게임 시작</button>
+    </div>
+
+    <div class="game-board" id="game-board"></div>
+  </div>
+
+  <script>
+    const colorList = [
+      '#FF5733', '#33FF57', '#3357FF', '#F39C12', '#9B59B6',
+      '#1ABC9C', '#E74C3C', '#34495E', '#2ECC71', '#FF33A6'
+    ];
+
+    function startGame() {
+      const totalCardCount = parseInt(document.getElementById('cardCount').value);
+      const board = document.getElementById('game-board');
+      board.innerHTML = '';
+
+      if (totalCardCount < 4 || totalCardCount > 20 || totalCardCount % 2 !== 0) {
+        alert('짝수 개의 카드만 입력할 수 있어요! (최소 4장, 최대 20장)');
+        return;
+      }
+
+      const pairCount = totalCardCount / 2;
+      const selectedColors = colorList.slice(0, pairCount);
+      const colorPairs = [...selectedColors, ...selectedColors];
+      colorPairs.sort(() => 0.5 - Math.random());
+
+      let flippedCards = [];
+      let lockBoard = false;
+      let matchedCount = 0;
+
+      colorPairs.forEach(color => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.dataset.color = color;
+
+        card.innerHTML = `
+          <div class="front" style="background-color: ${color};"></div>
+          <div class="back"></div>
+        `;
+
+        card.addEventListener('click', () => {
+          if (lockBoard || card.classList.contains('flipped')) return;
+
+          card.classList.add('flipped');
+          flippedCards.push(card);
+
+          if (flippedCards.length === 2) {
+            const [first, second] = flippedCards;
+            if (first.dataset.color === second.dataset.color) {
+              first.classList.add('matched');
+              second.classList.add('matched');
+              flippedCards = [];
+              matchedCount++;
+
+              if (matchedCount === pairCount) {
+                setTimeout(() => {
+                  alert('🎉 축하합니다! 모든 카드를 맞췄어요!');
+                }, 500);
+              }
+            } else {
+              lockBoard = true;
+              setTimeout(() => {
+                first.classList.remove('flipped');
+                second.classList.remove('flipped');
+                flippedCards = [];
+                lockBoard = false;
+              }, 800);
+            }
+          }
+        });
+
+        board.appendChild(card);
+      });
+    }
+  </script>
+
+</body>
+</html>

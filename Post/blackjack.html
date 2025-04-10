@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>블랙잭 게임</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f4f4;
+        }
+
+        .card_container { 
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .card {
+            width: 50px;
+            height: 80px;
+            border: 1px solid #000;
+            margin: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px;
+            
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: lightgray;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .content p:first-child {
+            background-color: #dff0d8;
+            padding: 10px;
+            border-left: 5px solid #3c763d;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+    <h1>블랙 잭 카드 게임</h1>
+    <div>
+        <h2>딜러 (<span id="dealer_score">0</span>)</h2>
+        <div id="dealer_cards" class ="card_container"></div>
+    </div>
+    <div>
+        <h2>플레이어 (<span id="player_score">0</span>)</h2>
+        <div id="player_cards" class ="card_container"></div>
+    </div>
+    <button onclick="hit()">히트</button>
+    <button onclick="stand()">스탠드</button>
+    <button onclick="restart()">재시작</button>
+    <p id="message"></p>
+    </div>
+    <script>
+        let deck = [];
+        let player_hand = [];
+        let dealer_hand = [];
+
+        // 카드 덱 만들기
+        function createDeck() {
+            let marks = ['♠', '♥', '♦', '♣'];
+            let numbers = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+            deck = [];
+            for (let mark of marks) {
+                for (let number of numbers) {
+                    deck.push({ mark, number });
+                }
+            }
+            deck.sort(() => Math.random() - 0.5);
+        }
+
+
+        // J Q K A 카드에 숫자 값 부여하기
+        function getCardNumber(card) { 
+            if (['J', 'Q', 'K'].includes(card.number)) return 10;
+            if (card.number === 'A') return 11;
+            return parseInt(card.number);
+        }
+
+        // 카드 점수 계산식 (에이스 카드는 조건에따라 10점 or 1점이 된다.)
+        function calculateScore(hand) {
+            let score = 0;
+            let aceCount = 0; 
+            for (let card of hand){
+                score += getCardNumber(card);
+                if (card.number === 'A') {
+                    aceCount++;
+                }
+            }
+            while (score > 21 && aceCount > 0 ) {
+                score -= 10;
+                aceCount--;
+            }
+            return score;
+        }
+
+        // 행동 선택 후 계산된 카드 점수 업데이트
+        function updateScore() {
+            document.getElementById("player_score").textContent = calculateScore(player_hand);
+            document.getElementById("dealer_score").textContent = calculateScore(dealer_hand);
+        }
+
+        // 카드 딜 
+        function dealCard(hand, elementID) {
+            let card = deck.pop();
+            hand.push(card);
+            let cardElement = document.createElement("div");
+            cardElement.className = "card";
+            cardElement.textContent = card.number + card.mark;
+            document.getElementById(elementID).appendChild(cardElement);
+            updateScore();
+        }
+
+        // 게임 시작 시 덱이 만들어지고, 
+        // 딜러와 플레이어는 각각 카드를 받는다.
+        function startGame() {
+            createDeck();
+            player_hand = [];
+            dealer_hand = [];
+            document.getElementById("player_cards").innerHTML = "";
+            document.getElementById("dealer_cards").innerHTML = "";
+            document.getElementById("message").textContent = "";
+            document.getElementById("player_score").textContent = "0";
+            document.getElementById("dealer_score").textContent = "0";
+
+            dealCard(player_hand, "player_cards");
+            dealCard(dealer_hand, "dealer_cards");
+
+        }
+        // 히트, 히트를 눌렀을 떄 dealCard 함수가 작동하며 손에 카드가 한장 들어오게됨.
+        // 카드 점수 계산을 통해 결과 확인
+        function hit() {
+            dealCard(player_hand, "player_cards");
+            let score = calculateScore(player_hand);
+            if (score > 21) {
+                document.getElementById("message").textContent = "버스트입니다. 패배하셨습니다.";
+            }
+        }
+
+        // 스탠드
+        function stand() {
+            let dealerScore = calculateScore(dealer_hand);
+            while (dealerScore < 17) {
+                dealCard(dealer_hand, "dealer_cards");
+                dealerScore = calculateScore(dealer_hand);
+            }
+            let playerScore = calculateScore(player_hand);
+            dealerScore = calculateScore(dealer_hand);
+
+            let message = "";
+            if (dealerScore > 21) {
+                message = "딜러 버스트, 플레이어의 승리입니다.";
+            } else if (playerScore > dealerScore) {
+                message=" 플레이어의 승리입니다. ";
+            } else if ( playerScore < dealerScore ){
+                message = " 플레이어의 패배입니다. ";
+            } else {
+                message = " 무승부 입니다. ";
+            }
+            document.getElementById("message").textContent = message;
+        }
+        // 재시작
+        function restart() {
+            startGame();
+        }
+
+        window.onload = startGame;
+
+    </script>
+</body>
+</html>
